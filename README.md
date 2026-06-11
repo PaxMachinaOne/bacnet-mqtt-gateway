@@ -154,6 +154,8 @@ make codeql
 
 `make codeql` runs local CodeQL analysis and prints any findings from the generated SARIF report.
 
+On macOS it auto-clears `com.apple.quarantine` attributes from the CodeQL install (Homebrew cask shim issue). If it cannot, it prints the command to run manually.
+
 Dependabot security fixes in this repo are handled through lockfile and override updates for transitive packages when needed. If you are maintaining a long-lived deployment branch, refresh dependencies and rerun both commands before release.
 
 3. Start the gateway and open admin interface
