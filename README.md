@@ -20,11 +20,14 @@ Quick start with Docker Compose (gateway + Mosquitto):
 
 ```bash
 cp .env.example .env   # adjust credentials and gateway ID
-docker compose up -d
+make dev-up
 ```
 
-This uses `docker-compose.yml` and `mosquitto.conf` in the repo, pulls `ghcr.io/novatechflow/bacnet-mqtt-gateway:latest`, and mounts `./devices` and `./config` into the container.
+This checks that Docker is reachable, starts Colima automatically when it is installed but stopped, builds the gateway image with Docker Buildx, then runs Docker Compose. You can also run `docker compose up -d` directly when you want to use the published image.
+It uses `docker-compose.yml` and `mosquitto.conf` in the repo, runs `bacnet-mqtt-gateway:local` for local development, and mounts `./devices` and `./config` into the container.
 The auth database lives in `./data` (mounted), so credentials persist across restarts.
+
+The Object Scan view includes a local demo scan on `localhost` or when the admin URL includes `?demo=1`. Use it to exercise diagnostics badges and filters without a live BACnet device.
 
 ## Functionalities
 
@@ -150,6 +153,8 @@ make codeql
 `make test` validates the admin UI JavaScript syntax and then runs the full Jest suite, including the backend and admin UI smoke tests.
 
 `make codeql` runs local CodeQL analysis and prints any findings from the generated SARIF report.
+
+On macOS it auto-clears `com.apple.quarantine` attributes from the CodeQL install (Homebrew cask shim issue). If it cannot, it prints the command to run manually.
 
 Dependabot security fixes in this repo are handled through lockfile and override updates for transitive packages when needed. If you are maintaining a long-lived deployment branch, refresh dependencies and rerun both commands before release.
 
