@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "reset-admin": "node scripts/reset-admin.js",
-    "test": "jest"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "bl": ">=7.0.12",
     "body-parser": ">=2.3.0",
     "bufferutil": ">=4.1.0",
-    "config": "^4.4.2",
+    "config": "^5.0.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": ">=5.2.1",
@@ -61,6 +61,6 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=26"
   }
 }
