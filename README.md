@@ -356,13 +356,18 @@ This gateway solves one of the core IoT platform challenges: **protocol diversit
 
 **Full architecture guide:** [IoT Platform Architecture Leadership](https://www.novatechflow.com/p/iot-platform-architecture-leadership.html)
 
+**Blog posts about this gateway:**
+
+- [How to Connect BACnet to the Cloud with an MQTT Gateway](https://www.novatechflow.com/2026/01/connect-bacnet-to-cloud-with-bacnet.html): device discovery, mapping points to topics, security and a working setup
+- [BACnet to MQTT in Production: The Real Cost of Bridging BACnet to MQTT at Scale](https://www.novatechflow.com/2026/03/bacnet-mqtt-in-production-real-cost-of.html)
+
 ### The Problem
 
 IoT platforms fail when they treat protocol integration as one-off work:
 
 > "IoT is not HTTP. Devices use MQTT, BACnet, Modbus, OPC UA, CAN, CoAP, proprietary serial frames, and edge-specific protocols. Without a unifying abstraction, teams implement one-off integrations that cannot scale or evolve."
 
-BACnet is everywhere in commercial buildings — but it's a local network protocol with no native cloud connectivity.
+BACnet is everywhere in commercial buildings. But it's a local network protocol with no native cloud connectivity.
 
 ### What This Gateway Does
 ```
@@ -388,18 +393,20 @@ BACnet Devices (HVAC, Lighting, Meters)
 
 ### Key Capabilities
 
-- **Bidirectional** — read (polling) and write (commands) to BACnet objects
-- **Home Assistant friendly** — state plus metadata topics for downstream consumers
-- **Production ready** — JWT auth, SQLite runtime state, health endpoints, Prometheus metrics
-- **Configurable** — per-device polling classes, schedules, freshness thresholds, write priorities, BACnet tags
-- **Containerized** — Docker image + Compose for easy deployment
+- **Bidirectional**: read (polling) and write (commands) to BACnet objects
+- **Home Assistant friendly**: state plus metadata topics for downstream consumers
+- **Production ready**: JWT auth, SQLite runtime state, health endpoints, Prometheus metrics
+- **Configurable**: per-device polling classes, schedules, freshness thresholds, write priorities, BACnet tags
+- **Containerized**: Docker image + Compose for easy deployment
 
 ### Where It Fits
 
-This gateway is a **reliability layer around a protocol bridge** — the edge layer that normalizes building automation data before it reaches your IoT platform, streaming pipeline, or data lake.
+This gateway is a **reliability layer around a protocol bridge**: the edge layer that normalizes building automation data before it reaches your IoT platform, streaming pipeline, or data lake.
 ```
 BACnet → bacnet-mqtt-gateway → MQTT Broker → Infinimesh / Kafka / Flink → Iceberg
 ```
+
+For the device layer behind the broker (registry, device shadow, MQTT bridge), see [infinimesh](https://infinimesh.org), the open source IoT platform I started.
 
 ---
 
